@@ -7,18 +7,18 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('store_user', function (Blueprint $table) {
+        Schema::create('product_store', function (Blueprint $table) {
+            $table->foreignId('product_id')->constrained();
             $table->foreignId('store_id')->constrained();
-            $table->foreignId('user_id')->constrained();
-            $table->string('role')->default('employee');
+            $table->integer('quantity');
             $table->timestamps();
 
-            $table->primary(['store_id', 'user_id']);
+            $table->primary(['product_id', 'store_id']);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('store_user');
+        Schema::dropIfExists('product_store');
     }
 };
