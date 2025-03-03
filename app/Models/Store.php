@@ -45,6 +45,16 @@ class Store extends Model
     }
 
     /**
+     * Store products.
+     */
+    public function products(): BelongsToMany
+    {
+        return $this->belongsToMany(Product::class)
+            ->withPivot('quantity')
+            ->withTimestamps();
+    }
+
+    /**
      * Store transactions.
      */
     public function transactions(): HasMany
