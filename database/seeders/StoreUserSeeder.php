@@ -29,8 +29,8 @@ class StoreUserSeeder extends Seeder
         ]);
 
         $employee1 = User::factory()->create([
-            'name' => 'Jane',
-            'email' => 'jane@gmail.com',
+            'name' => 'Dave',
+            'email' => 'dave@gmail.com',
             'password' => Hash::make('password'),
         ]);
         $employee2 = User::factory()->create([
@@ -41,6 +41,7 @@ class StoreUserSeeder extends Seeder
 
         $store1 = Store::factory()->create();
         $store2 = Store::factory()->create();
+        $store3 = Store::factory()->create();
 
         $store1->users()->attach([
             $owner1->id => ['role' => StoreRole::OWNER->value],
@@ -50,6 +51,9 @@ class StoreUserSeeder extends Seeder
         $store2->users()->attach([
             $owner3->id => ['role' => StoreRole::OWNER->value],
             $employee2->id => ['role' => StoreRole::EMPLOYEE->value],
+        ]);
+        $store3->users()->attach([
+            $owner2->id => ['role' => StoreRole::OWNER->value],
         ]);
     }
 }
