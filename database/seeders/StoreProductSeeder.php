@@ -27,6 +27,8 @@ class StoreProductSeeder extends Seeder
         ];
 
         foreach ($products as $product) {
+            $product['code'] = fake()->unique()->randomNumber(5);
+            $product['price'] = fake()->randomFloat(2, 10, 100);
             Product::create($product);
         }
 
