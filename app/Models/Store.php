@@ -12,6 +12,8 @@ class Store extends Model
 {
     use HasFactory;
 
+    // Relationships ----------------------------------------------------------------
+
     /**
      * Users that belong to the store.
      */
@@ -61,4 +63,6 @@ class Store extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+
+    // Business Logics ----------------------------------------------------------------
 }
