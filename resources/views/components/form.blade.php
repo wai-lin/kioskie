@@ -7,7 +7,7 @@
 
 <form
     class="{{$class}}"
-    :action="$action"
+    action="{{$action}}"
     method="POST"
     @if($upload) enctype="multipart/form-data" @endif
 >

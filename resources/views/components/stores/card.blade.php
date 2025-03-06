@@ -46,9 +46,10 @@
     </div>
 
     <div class="flex items-end justify-between">
-
         @if($href)
-            <flux:button size="sm" variant="primary" href="{{$href}}">View Details</flux:button>
+            <flux:button size="sm" variant="filled" class="text-xs" :href="$href">
+                View Details
+            </flux:button>
         @endif
     </div>
 </article>
