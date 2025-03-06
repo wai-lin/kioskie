@@ -22,7 +22,9 @@
     "
 >
     <div class="flex items-end justify-between mb-2">
-        <h5 class="text-lg font-bold">{{$store->name}}</h5>
+        <h5 title="{{$store->name}}" class="text-lg font-bold truncate max-w-3/5">
+            {{$store->name}}
+        </h5>
 
         <p class="text-sm text-zinc-500">
             {{$productsCount}} product{{$productsCount > 1 ? "s" : ""}}
