@@ -9,6 +9,14 @@
         </flux:button>
     </div>
 
+    @if(Session::has('success'))
+        <div class="my-4">
+            <x-alert>
+                {{Session::get('success')}}
+            </x-alert>
+        </div>
+    @endif
+
     <section class="grid grid-cols-3 gap-8">
         @foreach($stores as $store)
             <x-stores.card :store="$store" :href="route('stores.show', $store->id)"/>
