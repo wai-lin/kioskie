@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\TransactionAction;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +15,7 @@ return new class extends Migration
             $table->foreignId('actor_id')->constrained();
             $table->foreignId('product_id')->constrained();
             $table->integer('quantity');
-            $table->string('action');
+            $table->enum('action', TransactionAction::values());
             $table->decimal('price', 10, 2);
             $table->timestamps();
         });
