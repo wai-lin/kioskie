@@ -22,4 +22,8 @@
             <x-stores.card :store="$store" :href="route('stores.show', $store->id)"/>
         @endforeach
     </section>
+
+    <div class="py-4">
+        {{$stores->links()}}
+    </div>
 </x-layouts.app>

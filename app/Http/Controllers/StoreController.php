@@ -11,8 +11,9 @@ class StoreController extends Controller
 {
     public function index()
     {
-        $stores = Auth::user()->stores->sortByDesc('created_at');
-        $stores = $stores->load(['products', 'owners']);
+        $stores = Store::with(['products', 'owners'])
+            ->whereRelation('owners', 'user_id', '=', Auth::id())
+            ->paginate(12);
 
         return view('livewire.stores.index', compact('stores'));
     }

@@ -55,5 +55,12 @@ class StoreUserSeeder extends Seeder
         $store3->users()->attach([
             $owner2->id => ['role' => StoreRole::OWNER->value],
         ]);
+
+        $stores = Store::factory(25)->create();
+        foreach ($stores as $store) {
+            $store->users()->attach([
+                $owner1->id => ['role' => StoreRole::OWNER->value],
+            ]);
+        }
     }
 }
