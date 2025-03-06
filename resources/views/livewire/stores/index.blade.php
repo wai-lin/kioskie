@@ -1,7 +1,13 @@
 <x-layouts.app>
-    <flux:breadcrumbs class="mb-8">
-        <flux:breadcrumbs.item>Stores</flux:breadcrumbs.item>
-    </flux:breadcrumbs>
+    <div class="mb-8 flex items-center justify-between">
+        <flux:breadcrumbs>
+            <flux:breadcrumbs.item>Stores</flux:breadcrumbs.item>
+        </flux:breadcrumbs>
+
+        <flux:button size="sm" variant="primary" icon="squares-plus" :href="route('stores.create')">
+            Create Store
+        </flux:button>
+    </div>
 
     <section class="grid grid-cols-3 gap-8">
         @foreach($stores as $store)

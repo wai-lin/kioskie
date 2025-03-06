@@ -16,7 +16,9 @@ class StoreController extends Controller
         return view('livewire.stores.index', compact('stores'));
     }
 
-    public function create() {}
+    public function create() {
+        return view('livewire.stores.create');
+    }
 
     public function store(Request $request) {}
 
