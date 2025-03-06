@@ -4,7 +4,7 @@
         <flux:breadcrumbs.item>Create</flux:breadcrumbs.item>
     </flux:breadcrumbs>
 
-    <x-form class="max-w-1/3 space-y-6">
+    <x-form :action="route('stores.store')" class="max-w-1/3 space-y-6">
         <flux:input wire:model="name" label="Name" type="text" size="sm" />
 
         <div class="flex justify-end">
