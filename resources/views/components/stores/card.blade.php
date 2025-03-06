@@ -46,10 +46,22 @@
     </div>
 
     <div class="flex items-end justify-between">
+        <div>
         @if($href)
             <flux:button size="sm" variant="filled" class="text-xs" :href="$href">
                 View Details
             </flux:button>
         @endif
+        </div>
+
+        <div>
+            <flux:dropdown>
+                <flux:button size="sm" icon="ellipsis-horizontal" />
+
+                <flux:menu>
+                    <flux:menu.item icon="trash" variant="danger">Delete</flux:menu.item>
+                </flux:menu>
+            </flux:dropdown>
+        </div>
     </div>
 </article>
