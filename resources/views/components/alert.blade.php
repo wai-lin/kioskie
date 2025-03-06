@@ -10,9 +10,11 @@
         grid
         grid-cols-[1fr_30px]
         gap-4
-        absolute
+        fixed
         right-4
         top-4
+        z-10
+        shadow-md
     "
 >
     <div>{{$slot}}</div>
