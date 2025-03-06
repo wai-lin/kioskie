@@ -17,7 +17,7 @@
         py-4
         px-8
         ring-offset-2
-        ring-zinc-500
+        ring-yellow-500
         hover:ring-1
     "
 >
@@ -48,7 +48,7 @@
     <div class="flex items-end justify-between">
 
         @if($href)
-            <flux:button size="sm" href="{{$href}}">View Details</flux:button>
+            <flux:button size="sm" variant="primary" href="{{$href}}">View Details</flux:button>
         @endif
     </div>
 </article>

@@ -17,7 +17,7 @@
                 {{ __('Dashboard') }}
             </flux:navlist.item>
 
-            <flux:navlist.item icon="building-storefront" :href="route('stores.index')">
+            <flux:navlist.item icon="building-storefront" :href="route('stores.index')" :current="request()->routeIs('stores.*')">
                 Stores
             </flux:navlist.item>
         </flux:navlist.group>
