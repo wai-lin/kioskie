@@ -1,5 +1,7 @@
 <x-layouts.app>
-    <x-page-title class="mb-8">Stores</x-page-title>
+    <flux:breadcrumbs class="mb-8">
+        <flux:breadcrumbs.item>Stores</flux:breadcrumbs.item>
+    </flux:breadcrumbs>
 
     <section class="grid grid-cols-3 gap-8">
         @foreach($stores as $store)
