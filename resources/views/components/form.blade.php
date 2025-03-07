@@ -1,11 +1,13 @@
 @props([
-    'class',
     'action',
+    'id' => null,
+    'class' => null,
     'method' => 'post',
     'upload' => false,
 ])
 
 <form
+    id="{{$id}}"
     class="{{$class}}"
     action="{{$action}}"
     method="POST"
