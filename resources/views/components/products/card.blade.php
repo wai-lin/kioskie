@@ -4,10 +4,15 @@
 ])
 
 <x-card>
-    <div class="flex items-end justify-between mb-2">
-        <h5 title="{{$product->name}}" class="text-lg font-bold truncate max-w-3/5">
+    <div class="flex flex-col justify-between mb-4">
+        <h5 title="{{$product->name}}" class="text-lg font-bold truncate max-w-[90%]">
             {{$product->name}}
         </h5>
+
+        <p class="text-sm text-gray-500 flex gap-1">
+            <span>{{$product->price}}</span>
+            <span>THB</span>
+        </p>
     </div>
 
     <div class="flex items-end justify-between">
