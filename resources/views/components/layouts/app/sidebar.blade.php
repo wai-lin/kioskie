@@ -8,17 +8,21 @@
     <flux:sidebar.toggle class="lg:hidden" icon="x-mark"/>
 
     <a href="{{ route('dashboard') }}" class="mr-5 flex items-center space-x-2" wire:navigate>
-        <x-app-logo class="size-8" href="#"></x-app-logo>
+        <x-app-logo href="#"></x-app-logo>
     </a>
 
     <flux:navlist variant="outline">
-        <flux:navlist.group heading="Platform" class="grid">
+        <flux:navlist.group heading="Control Center" class="grid">
             <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                 {{ __('Dashboard') }}
             </flux:navlist.item>
 
             <flux:navlist.item icon="building-storefront" :href="route('stores.index')" :current="request()->routeIs('stores.*')">
                 Stores
+            </flux:navlist.item>
+
+            <flux:navlist.item icon="rectangle-stack" :href="route('products.index')" :current="request()->routeIs('products.*')">
+                Products
             </flux:navlist.item>
         </flux:navlist.group>
     </flux:navlist>

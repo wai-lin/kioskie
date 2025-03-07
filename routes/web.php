@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
@@ -19,6 +20,7 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 
     Route::resource('stores', StoreController::class);
+    Route::resource('products', ProductController::class);
 });
 
 require __DIR__.'/auth.php';
