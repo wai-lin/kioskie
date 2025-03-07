@@ -11,6 +11,8 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     /**
      * Get the stores that sell the product.
      */
