@@ -1,4 +1,5 @@
 <x-layouts.app>
+
     @if(Session::has('success'))
         <div class="my-4">
             <x-alert>
@@ -17,13 +18,6 @@
         </flux:button>
     </div>
 
-    <div class="py-4">
-        {{$stores->links()}}
-    </div>
+    <x-stores.list :stores="$stores" />
 
-    <section class="grid grid-cols-3 gap-8">
-        @foreach($stores as $store)
-            <x-stores.card :store="$store" :href="route('stores.show', $store->id)"/>
-        @endforeach
-    </section>
 </x-layouts.app>
