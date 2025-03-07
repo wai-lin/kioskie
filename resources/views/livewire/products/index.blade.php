@@ -4,7 +4,7 @@
             <flux:breadcrumbs.item>Products</flux:breadcrumbs.item>
         </flux:breadcrumbs>
 
-        <flux:button size="sm" variant="primary" icon="squares-plus" :href="route('stores.create')">
+        <flux:button size="sm" variant="primary" icon="squares-plus" :href="route('products.create')">
             Create Product
         </flux:button>
     </div>
