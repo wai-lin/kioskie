@@ -12,6 +12,7 @@ class StoreController extends Controller
     public function index()
     {
         $stores = Store::with(['products', 'owners'])
+            ->orderByDesc('created_at')
             ->whereRelation('owners', 'user_id', '=', Auth::id())
             ->paginate(12);
 
@@ -29,6 +30,7 @@ class StoreController extends Controller
             'name' => 'required|string|min:3|max:255',
         ]);
 
+        // TODO: accept store image
         $store = Store::create([
             'name' => $request->name,
         ]);
