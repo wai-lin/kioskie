@@ -65,5 +65,10 @@ class StoreController extends Controller
 
     public function update(Request $request, $id) {}
 
-    public function destroy($id) {}
+    public function destroy(Store $store) {
+        Store::destroy($store->id);
+
+        return redirect()->route('stores.index')
+            ->with('success', 'Store deleted successfully.');
+    }
 }

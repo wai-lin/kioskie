@@ -46,11 +46,24 @@
 
         @auth
             <div>
+                <x-form
+                    method="delete"
+                    id="stores.delete.{{$store->id}}"
+                    :action="route('stores.destroy', $store)"
+                />
+
                 <flux:dropdown>
                     <flux:button size="sm" icon="ellipsis-horizontal" />
 
                     <flux:menu>
-                        <flux:menu.item icon="trash" variant="danger">Delete</flux:menu.item>
+                        <flux:menu.item
+                            icon="trash"
+                            variant="danger"
+                            type="submit"
+                            form="stores.delete.{{$store->id}}"
+                        >
+                            Delete
+                        </flux:menu.item>
                     </flux:menu>
                 </flux:dropdown>
             </div>
