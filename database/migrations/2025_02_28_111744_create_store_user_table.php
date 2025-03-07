@@ -10,8 +10,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('store_user', function (Blueprint $table) {
-            $table->foreignId('store_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('store_id');
+            $table->foreignId('user_id');
             $table->enum('role', StoreRole::values())->default(StoreRole::EMPLOYEE->value);
             $table->timestamps();
 

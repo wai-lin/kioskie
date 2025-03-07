@@ -9,8 +9,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('product_store', function (Blueprint $table) {
-            $table->foreignId('product_id')->constrained();
-            $table->foreignId('store_id')->constrained();
+            $table->foreignId('product_id');
+            $table->foreignId('store_id');
             $table->integer('quantity');
             $table->timestamps();
 
