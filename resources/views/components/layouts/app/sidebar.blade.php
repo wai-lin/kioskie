@@ -24,6 +24,10 @@
             <flux:navlist.item icon="rectangle-stack" :href="route('products.index')" :current="request()->routeIs('products.*')">
                 Products
             </flux:navlist.item>
+
+            <flux:navlist.item icon="document-currency-dollar" :href="route('transactions.index')" :current="request()->routeIs('transactions.*')">
+                Transactions
+            </flux:navlist.item>
         </flux:navlist.group>
     </flux:navlist>
 
