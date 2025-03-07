@@ -1,12 +1,7 @@
 <x-layouts.app>
 
-    @if(Session::has('success'))
-        <div class="my-4">
-            <x-alert>
-                {{Session::get('success')}}
-            </x-alert>
-        </div>
-    @endif
+    <x-notification type="success" :message="Session::get('success')" />
+    <x-notification type="info" :message="Session::get('info')" />
 
     <div class="mb-4 flex items-center justify-between">
         <flux:breadcrumbs>

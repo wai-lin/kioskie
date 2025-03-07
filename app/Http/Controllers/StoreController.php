@@ -69,6 +69,6 @@ class StoreController extends Controller
         Store::destroy($store->id);
 
         return redirect()->route('stores.index')
-            ->with('success', 'Store deleted successfully.');
+            ->with('info', 'Store deleted successfully.');
     }
 }
