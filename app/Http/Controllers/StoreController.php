@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class StoreController extends Controller
 {
+    public function storesList() {
+        $stores = Store::with(['products', 'owners'])
+            ->orderByDesc('created_at')
+            ->paginate(12);
+
+        return view('livewire.stores.list', compact('stores'));
+    }
+
     public function storeProducts(Store $store) {
         return view('livewire.stores.products', compact('store'));
     }
