@@ -1,0 +1,15 @@
+<article
+    class="
+        bg-white
+        rounded-xl
+        border
+        border-zinc-300
+        py-4
+        px-8
+        ring-offset-2
+        ring-yellow-500
+        hover:ring-1
+    "
+>
+    {{$slot}}
+</article>

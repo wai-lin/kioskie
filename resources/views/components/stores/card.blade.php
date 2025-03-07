@@ -8,19 +8,7 @@
     $first2Owners = $store->owners->take(2);
 @endphp
 
-<article
-    class="
-        bg-white
-        rounded-xl
-        border
-        border-zinc-300
-        py-4
-        px-8
-        ring-offset-2
-        ring-yellow-500
-        hover:ring-1
-    "
->
+<x-card>
     <div class="flex items-end justify-between mb-2">
         <h5 title="{{$store->name}}" class="text-lg font-bold truncate max-w-3/5">
             {{$store->name}}
@@ -66,4 +54,4 @@
             </flux:dropdown>
         </div>
     </div>
-</article>
+</x-card>
