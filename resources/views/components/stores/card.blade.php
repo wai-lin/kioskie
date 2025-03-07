@@ -44,14 +44,16 @@
         @endif
         </div>
 
-        <div>
-            <flux:dropdown>
-                <flux:button size="sm" icon="ellipsis-horizontal" />
+        @auth
+            <div>
+                <flux:dropdown>
+                    <flux:button size="sm" icon="ellipsis-horizontal" />
 
-                <flux:menu>
-                    <flux:menu.item icon="trash" variant="danger">Delete</flux:menu.item>
-                </flux:menu>
-            </flux:dropdown>
-        </div>
+                    <flux:menu>
+                        <flux:menu.item icon="trash" variant="danger">Delete</flux:menu.item>
+                    </flux:menu>
+                </flux:dropdown>
+            </div>
+        @endauth
     </div>
 </x-card>
