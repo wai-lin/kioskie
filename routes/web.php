@@ -10,6 +10,13 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+Route::prefix('stores')->group(function () {
+//    Route::get('', [StoreController::class, 'index'])
+//        ->name('stores.index');
+    Route::get('{store}/products', [StoreController::class, 'storeProducts'])
+        ->name('stores.products');
+});
+
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');

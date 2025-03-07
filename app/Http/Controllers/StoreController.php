@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class StoreController extends Controller
 {
+    public function storeProducts(Store $store) {
+        return view('livewire.stores.products', compact('store'));
+    }
+
     public function index()
     {
         $stores = Store::with(['products', 'owners'])
