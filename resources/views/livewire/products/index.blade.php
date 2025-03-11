@@ -1,4 +1,8 @@
 <x-layouts.app>
+
+    <x-notification type="success" :message="Session::get('success')" />
+    <x-notification type="info" :message="Session::get('info')" />
+
     <div class="mb-4 flex items-center justify-between">
         <flux:breadcrumbs>
             <flux:breadcrumbs.item>Products</flux:breadcrumbs.item>
@@ -14,4 +18,5 @@
     </div>
 
     <x-products.list :products="$products" />
+
 </x-layouts.app>
