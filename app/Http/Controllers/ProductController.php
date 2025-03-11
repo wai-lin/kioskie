@@ -8,12 +8,14 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function index() {
-        $products = Product::orderByDesc('created_at')->paginate(8);
+        $products = Product::orderByDesc('updated_at')
+            ->paginate(8);
+
         return view('livewire.products.index', compact('products'));
     }
 
     public function show(Product $product) {
-        return view('livewire.products.index', compact('product'));
+        return view('livewire.products.show', compact('product'));
     }
 
     public function create() {
