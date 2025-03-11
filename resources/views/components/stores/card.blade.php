@@ -57,6 +57,12 @@
 
                     <flux:menu>
                         <flux:menu.item
+                            icon="pencil"
+                            :href="route('stores.edit', $store)"
+                        >
+                            Edit
+                        </flux:menu.item>
+                        <flux:menu.item
                             icon="trash"
                             variant="danger"
                             type="submit"

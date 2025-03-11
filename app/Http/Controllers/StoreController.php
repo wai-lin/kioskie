@@ -11,7 +11,7 @@ class StoreController extends Controller
 {
     public function storesList() {
         $stores = Store::with(['products', 'owners'])
-            ->orderByDesc('created_at')
+            ->orderByDesc('updated_at')
             ->paginate(12);
 
         return view('livewire.stores.list', compact('stores'));
@@ -24,7 +24,7 @@ class StoreController extends Controller
     public function index()
     {
         $stores = Store::with(['products', 'owners'])
-            ->orderByDesc('created_at')
+            ->orderByDesc('updated_at')
             ->whereRelation('owners', 'user_id', '=', Auth::id())
             ->paginate(12);
 
@@ -61,9 +61,23 @@ class StoreController extends Controller
         return view('livewire.stores.show', compact('store'));
     }
 
-    public function edit($id) {}
+    public function edit(Store $store) {
+        return view('livewire.stores.edit', compact('store'));
+    }
 
-    public function update(Request $request, $id) {}
+    public function update(Request $request, Store $store) {
+        $request->validate([
+            'name' => 'required|string|min:3|max:255',
+        ]);
+
+        $store->update([
+            'name' => $request->name,
+        ]);
+
+        return redirect()
+            ->route('stores.index')
+            ->with('info', 'Store updated successfully.');
+    }
 
     public function destroy(Store $store) {
         Store::destroy($store->id);
