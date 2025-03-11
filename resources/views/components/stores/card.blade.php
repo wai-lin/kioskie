@@ -9,15 +9,16 @@
 @endphp
 
 <x-card>
-    <div class="flex items-end justify-between mb-2">
-        <h5 title="{{$store->name}}" class="text-lg font-bold truncate max-w-3/5">
+    <div class="flex items-center gap-4 mb-4">
+        <x-image :src="$store->getFirstMediaUrl('stores.'.$store->id)" class="size-12 rounded-lg"/>
+        <h5 title="{{$store->name}}" class="text-lg font-bold truncate max-w-full">
             {{$store->name}}
         </h5>
-
-        <p class="text-sm text-zinc-500">
-            {{$productsCount}} product{{$productsCount > 1 ? "s" : ""}}
-        </p>
     </div>
+
+    <p class="text-sm text-zinc-500 mb-2">
+        {{$productsCount}} product{{$productsCount > 1 ? "s" : ""}}
+    </p>
 
     <div class="flex items-center gap-1 mb-6">
         <h6 class="text-sm text-zinc-500">Owners :</h6>
@@ -37,11 +38,11 @@
 
     <div class="flex items-end justify-between">
         <div>
-        @if($href)
-            <flux:button size="sm" variant="filled" class="text-xs" :href="$href">
-                View Details
-            </flux:button>
-        @endif
+            @if($href)
+                <flux:button size="sm" variant="filled" class="text-xs" :href="$href">
+                    View Details
+                </flux:button>
+            @endif
         </div>
 
         @auth
@@ -53,7 +54,7 @@
                 />
 
                 <flux:dropdown>
-                    <flux:button size="sm" icon="ellipsis-horizontal" />
+                    <flux:button size="sm" icon="ellipsis-horizontal"/>
 
                     <flux:menu>
                         <flux:menu.item
