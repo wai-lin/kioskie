@@ -58,6 +58,7 @@ class StoreController extends Controller
 
     public function show(Store $store)
     {
+        $store->load(['products', 'owners']);
         return view('livewire.stores.show', compact('store'));
     }
 
