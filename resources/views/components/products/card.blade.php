@@ -1,11 +1,14 @@
 @props([
     'product',
+    'store' => null,
     'href' => null,
+    'isOwner' => false,
 ])
 
 @php
-    $quantity = $product?->pivot?->quantity;
+    $quantity = $product?->pivot?->quantity ?? 0;
     $quantityColor = $quantity <= 100 ? 'text-red-500' : 'text-zinc-500';
+    $canEditStock = $store && $isOwner;
 @endphp
 
 <x-card>
@@ -19,10 +22,10 @@
             <span>THB</span>
         </p>
 
-        @if($quantity)
+        @if($quantity > 0)
             <p class="flex items-end gap-1 text-sm {{$quantityColor}}">
                 <span>Qty :</span>
-                <span>{{$product->pivot->quantity}}</span>
+                <span>{{$quantity}}</span>
             </p>
         @endif
     </div>
@@ -48,6 +51,14 @@
                     <flux:button size="sm" icon="ellipsis-horizontal"/>
 
                     <flux:menu>
+                        @if($canEditStock)
+                            <flux:menu.item
+                                icon="inbox-stack"
+                                :href="route('stores.edit_stock', [$store, $product])"
+                            >
+                                Edit Stock
+                            </flux:menu.item>
+                        @endif
                         <flux:menu.item
                             icon="pencil"
                             :href="route('products.edit', $product)"

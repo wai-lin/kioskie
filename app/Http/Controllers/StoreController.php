@@ -24,7 +24,9 @@ class StoreController extends Controller
     {
         $store->load(['products', 'owners']);
 
-        return view('livewire.stores.show', compact('store'));
+        $isOwner = $store->owners()->where('user_id', Auth::id())->exists();
+
+        return view('livewire.stores.show', compact('store', 'isOwner'));
     }
 
     public function create()
@@ -116,5 +118,31 @@ class StoreController extends Controller
         return redirect()
             ->route('stores.show', $store)
             ->with('success', 'Products linked successfully.');
+    }
+
+    public function editProductStockForm(Store $store, Product $product)
+    {
+        return view('livewire.stores.edit_stock', compact('store', 'product'));
+    }
+
+    public function editProductStock(Request $request, Store $store, Product $product) {
+        $request->validate([
+            'action' => 'required|in:restock,deplete',
+            'amount' => 'required|integer|min:1',
+        ]);
+
+        $productQty = $store->products()->where('product_id', $product->id)->first()->pivot->quantity ?? 0;
+        $newQty = match ($request->action) {
+            'restock' => $productQty + $request->amount,
+            'deplete' => $productQty - $request->amount,
+        };
+
+        $store->products()->updateExistingPivot($product->id, [
+            'quantity' => $newQty,
+        ]);
+
+        return redirect()
+            ->route('stores.show', compact('store'))
+            ->with('success', 'Product stock updated successfully.');
     }
 }

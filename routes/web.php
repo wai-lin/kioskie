@@ -35,6 +35,11 @@ Route::middleware(['auth'])->group(function () {
         ->name('stores.link_products_form');
     Route::put('stores/{store}/link-products', [StoreController::class, 'linkProducts'])
         ->name('stores.link_products');
+
+    Route::get('stores/{store}/{product}/edit-stock', [StoreController::class, 'editProductStockForm'])
+        ->name('stores.edit_stock_form');
+    Route::put('stores/{store}/{product}/edit-stock', [StoreController::class, 'editProductStock'])
+        ->name('stores.edit_stock');
 });
 
 require __DIR__.'/auth.php';

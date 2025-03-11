@@ -15,5 +15,5 @@
         </flux:button>
     </div>
 
-    <x-products.list :products="$store->products"/>
+    <x-products.list :products="$store->products" :store="$store" :isOwner="$isOwner" />
 </x-layouts.app>
