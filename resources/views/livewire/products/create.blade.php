@@ -13,10 +13,9 @@
         <flux:input wire:model="name" label="Name" type="text" size="sm" />
         <flux:input wire:model="price" label="Price" type="number" size="sm" />
 
-        <div class="flex justify-end">
-            <flux:button size="sm" variant="primary" type="submit">
-                Create
-            </flux:button>
+        <div class="flex justify-end gap-4">
+            <flux:button size="sm" :href="route('products.index')">Cancel</flux:button>
+            <flux:button size="sm" variant="primary" type="submit">Create</flux:button>
         </div>
     </x-form>
 </x-layouts.app>

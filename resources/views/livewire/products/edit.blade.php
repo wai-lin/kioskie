@@ -1,7 +1,7 @@
 <x-layouts.app>
     <flux:breadcrumbs class="mb-4">
         <flux:breadcrumbs.item :href="route('products.index')">Products</flux:breadcrumbs.item>
-        <flux:breadcrumbs.item>{{$product->name}}</flux:breadcrumbs.item>
+        <flux:breadcrumbs.item :href="route('products.show', $product)">{{$product->name}}</flux:breadcrumbs.item>
         <flux:breadcrumbs.item>Edit</flux:breadcrumbs.item>
     </flux:breadcrumbs>
 
@@ -14,7 +14,10 @@
         <flux:input wire:model="name" label="Name" type="text" size="sm" :value="$product->name"/>
         <flux:input wire:model="price" label="Price" type="number" size="sm" :value="$product->price"/>
 
-        <div class="flex justify-end">
+        <div class="flex justify-end gap-4">
+            <flux:button size="sm" :href="route('products.index')">
+                Cancel
+            </flux:button>
             <flux:button size="sm" variant="primary" type="submit">
                 Edit
             </flux:button>

@@ -7,7 +7,8 @@
     <x-form :action="route('stores.store')" class="max-w-1/3 space-y-6">
         <flux:input wire:model="name" label="Name" type="text" size="sm" />
 
-        <div class="flex justify-end">
+        <div class="flex justify-end gap-4">
+            <flux:button size="sm" :href="route('stores.index')">Cancel</flux:button>
             <flux:button size="sm" variant="primary" type="submit">Create</flux:button>
         </div>
     </x-form>

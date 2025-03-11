@@ -18,7 +18,8 @@
             :value="$store->name"
         />
 
-        <div class="flex justify-end">
+        <div class="flex justify-end gap-4">
+            <flux:button size="sm" :href="route('stores.index')">Cancel</flux:button>
             <flux:button size="sm" variant="primary" type="submit">Edit</flux:button>
         </div>
     </x-form>
