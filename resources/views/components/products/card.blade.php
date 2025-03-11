@@ -25,11 +25,30 @@
         </div>
 
         <div>
+            <x-form
+                method="delete"
+                id="products.delete.{{$product->id}}"
+                :action="route('products.destroy', $product)"
+            />
+
             <flux:dropdown>
-                <flux:button size="sm" icon="ellipsis-horizontal" />
+                <flux:button size="sm" icon="ellipsis-horizontal"/>
 
                 <flux:menu>
-                    <flux:menu.item icon="trash" variant="danger">Delete</flux:menu.item>
+                    <flux:menu.item
+                        icon="pencil"
+                        :href="route('products.edit', $product)"
+                    >
+                        Edit
+                    </flux:menu.item>
+                    <flux:menu.item
+                        icon="trash"
+                        variant="danger"
+                        type="submit"
+                        form="products.delete.{{$product->id}}"
+                    >
+                        Delete
+                    </flux:menu.item>
                 </flux:menu>
             </flux:dropdown>
         </div>
