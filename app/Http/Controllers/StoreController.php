@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class StoreController extends Controller
 {
-    public function storesList() {
+    public function storesList()
+    {
         $stores = Store::with(['products', 'owners'])
             ->orderByDesc('updated_at')
             ->paginate(12);
@@ -17,7 +18,8 @@ class StoreController extends Controller
         return view('livewire.stores.list', compact('stores'));
     }
 
-    public function storeProducts(Store $store) {
+    public function storeProducts(Store $store)
+    {
         return view('livewire.stores.products', compact('store'));
     }
 
@@ -59,14 +61,17 @@ class StoreController extends Controller
     public function show(Store $store)
     {
         $store->load(['products', 'owners']);
+
         return view('livewire.stores.show', compact('store'));
     }
 
-    public function edit(Store $store) {
+    public function edit(Store $store)
+    {
         return view('livewire.stores.edit', compact('store'));
     }
 
-    public function update(Request $request, Store $store) {
+    public function update(Request $request, Store $store)
+    {
         $request->validate([
             'name' => 'required|string|min:3|max:255',
         ]);
@@ -80,7 +85,8 @@ class StoreController extends Controller
             ->with('info', 'Store updated successfully.');
     }
 
-    public function destroy(Store $store) {
+    public function destroy(Store $store)
+    {
         Store::destroy($store->id);
 
         return redirect()->route('stores.index')
