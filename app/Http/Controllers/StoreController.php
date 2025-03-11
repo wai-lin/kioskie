@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\StoreRole;
+use App\Models\Product;
 use App\Models\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -91,5 +92,29 @@ class StoreController extends Controller
     public function storeProducts(Store $store)
     {
         return view('livewire.stores.products', compact('store'));
+    }
+
+    public function linkProductsForm(Store $store)
+    {
+        $products = Product::whereDoesntHave('stores', function ($query) use ($store) {
+            $query->where('store_id', $store->id);
+        })->get();
+
+        return view('livewire.stores.link_products', compact('store','products'));
+    }
+
+    public function linkProducts(Request $request, Store $store) {
+        $request->validate([
+            'products' => 'required|array',
+            'products.*' => 'exists:products,id',
+        ]);
+
+        foreach ($request->products as $product) {
+            $store->products()->attach($product, ['quantity' => 0]);
+        }
+
+        return redirect()
+            ->route('stores.show', $store)
+            ->with('success', 'Products linked successfully.');
     }
 }

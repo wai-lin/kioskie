@@ -1,8 +1,19 @@
 <x-layouts.app>
-    <flux:breadcrumbs class="mb-8">
-        <flux:breadcrumbs.item :href="route('stores.index')">Stores</flux:breadcrumbs.item>
-        <flux:breadcrumbs.item>{{$store->name}}</flux:breadcrumbs.item>
-    </flux:breadcrumbs>
+    <div class="flex items-center justify-between mb-8">
+        <flux:breadcrumbs>
+            <flux:breadcrumbs.item :href="route('stores.index')">Stores</flux:breadcrumbs.item>
+            <flux:breadcrumbs.item>{{$store->name}}</flux:breadcrumbs.item>
+        </flux:breadcrumbs>
 
-    <x-products.list :products="$store->products" />
+        <flux:button
+            size="sm"
+            icon="link"
+            variant="primary"
+            :href="route('stores.link_products_form', $store)"
+        >
+            Link Products
+        </flux:button>
+    </div>
+
+    <x-products.list :products="$store->products"/>
 </x-layouts.app>

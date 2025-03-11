@@ -30,6 +30,11 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('stores', StoreController::class);
     Route::resource('products', ProductController::class);
     Route::resource('transactions', TransactionController::class);
+
+    Route::get('stores/{store}/link-products', [StoreController::class, 'linkProductsForm'])
+        ->name('stores.link_products_form');
+    Route::put('stores/{store}/link-products', [StoreController::class, 'linkProducts'])
+        ->name('stores.link_products');
 });
 
 require __DIR__.'/auth.php';
