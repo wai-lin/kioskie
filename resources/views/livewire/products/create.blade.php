@@ -8,11 +8,12 @@
         </flux:breadcrumbs.item>
     </flux:breadcrumbs>
 
-    <x-form upload :action="route('products.store')" class="max-w-1/3 space-y-6">
+    <x-form upload :action="route('products.store')" class="max-w-2/3 space-y-6">
         <x-image-upload id="image" name="image" label="Image" />
         <flux:input wire:model="code" label="Code" type="text" size="sm" :value="fake()->unique()->randomNumber(5)" />
         <flux:input wire:model="name" label="Name" type="text" size="sm" />
         <flux:input wire:model="price" label="Price" type="number" size="sm" />
+        <x-rich-text-editor name="description" label="Description" />
 
         <div class="flex justify-end gap-4">
             <flux:button size="sm" :href="route('products.index')">Cancel</flux:button>
