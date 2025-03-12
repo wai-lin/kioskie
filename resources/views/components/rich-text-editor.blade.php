@@ -19,7 +19,7 @@
         value="{{$value}}"
         placeholder="{{$placeholder}}"
         class="editor {{$class}}"
-    ></textarea>
+    >{{old($name, $value)}}</textarea>
 
 </flux:field>
 
