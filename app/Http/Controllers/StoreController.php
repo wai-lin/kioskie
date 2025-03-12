@@ -37,10 +37,10 @@ class StoreController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'name' => 'required|string|min:3|max:255',
         ]);
 
-        // TODO: accept store image
         $store = Store::create([
             'name' => $request->name,
         ]);
@@ -48,6 +48,11 @@ class StoreController extends Controller
             auth()->user()->id,
             ['role' => StoreRole::OWNER->value],
         );
+
+        if ($request->hasFile('logo')) {
+            $store->addMediafromRequest('logo')
+                ->toMediaLibrary('stores.'.$store->id);
+        }
 
         return redirect()
             ->route('stores.index')
@@ -62,12 +67,18 @@ class StoreController extends Controller
     public function update(Request $request, Store $store)
     {
         $request->validate([
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'name' => 'required|string|min:3|max:255',
         ]);
 
         $store->update([
             'name' => $request->name,
         ]);
+        if ($request->hasFile('logo')) {
+            $store->clearMediaCollection('stores.'.$store->id);
+            $store->addMediafromRequest('logo')
+                ->toMediaLibrary('stores.'.$store->id);
+        }
 
         return redirect()
             ->route('stores.index')
@@ -102,10 +113,11 @@ class StoreController extends Controller
             $query->where('store_id', $store->id);
         })->get();
 
-        return view('livewire.stores.link_products', compact('store','products'));
+        return view('livewire.stores.link_products', compact('store', 'products'));
     }
 
-    public function linkProducts(Request $request, Store $store) {
+    public function linkProducts(Request $request, Store $store)
+    {
         $request->validate([
             'products' => 'required|array',
             'products.*' => 'exists:products,id',
@@ -125,7 +137,8 @@ class StoreController extends Controller
         return view('livewire.stores.edit_stock', compact('store', 'product'));
     }
 
-    public function editProductStock(Request $request, Store $store, Product $product) {
+    public function editProductStock(Request $request, Store $store, Product $product)
+    {
         $request->validate([
             'action' => 'required|in:restock,deplete',
             'amount' => 'required|integer|min:1',

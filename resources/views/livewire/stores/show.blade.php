@@ -15,5 +15,7 @@
         </flux:button>
     </div>
 
+    <flux:heading size="lg" class="mb-4">Products</flux:heading>
+
     <x-products.list :products="$store->products" :store="$store" :isOwner="$isOwner" />
 </x-layouts.app>

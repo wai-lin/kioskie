@@ -6,10 +6,13 @@
     </flux:breadcrumbs>
 
     <x-form
+        upload
         method="put"
         :action="route('stores.update', $store)"
         class="max-w-1/3 space-y-6"
     >
+        <x-image-upload id="logo" name="logo" label="Logo" :src="$store->getFirstMediaUrl('stores.'.$store->id)" />
+
         <flux:input
             wire:model="name"
             label="Name"
