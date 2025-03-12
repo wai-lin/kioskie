@@ -1,7 +1,8 @@
 <x-layouts.app>
     <flux:breadcrumbs class="mb-8">
         <flux:breadcrumbs.item :href="route('stores.index')">Stores</flux:breadcrumbs.item>
-        <flux:breadcrumbs.item>{{$store->name}}</flux:breadcrumbs.item>
+        <flux:breadcrumbs.item :href="route('stores.show', $store)">{{$store->name}}</flux:breadcrumbs.item>
+        <flux:breadcrumbs.item>Link Products</flux:breadcrumbs.item>
     </flux:breadcrumbs>
 
     <x-form
@@ -19,15 +20,15 @@
                         value="{{$product->id}}"
                         class="flex-none"
                     />
-                    <label for="products.{{$product->id}}" class="flex-auto">
-                        {{-- TODO: also show image --}}
+                    <label for="products.{{$product->id}}" class="flex-auto flex items-center gap-4">
+                        <x-image :src="$product->getFirstMediaUrl('products.'.$product->id)" class="size-16 rounded-lg" />
                         <span>{{$product->name}}</span>
                     </label>
                 </article>
             @endforeach
         </div>
 
-        <div class="flex items-center justify-start gap-4">
+        <div class="flex items-center justify-end gap-4">
             <flux:button size="sm" :href="route('stores.show', $store)">
                 Cancel
             </flux:button>
