@@ -19,8 +19,8 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $product->load('stores');
-
-        return view('livewire.products.show', compact('product'));
+        // return view('livewire.products.show', compact('product'));
+        return redirect()->route('products.edit', compact('product'));
     }
 
     public function create()
@@ -35,12 +35,14 @@ class ProductController extends Controller
             'code' => 'required|alpha_num|unique:products,code',
             'name' => 'required|string|min:1|max:255',
             'price' => 'required|numeric|min:0',
+            'description' => 'nullable|string',
         ]);
 
         $product = Product::create([
             'code' => $request->code,
             'name' => $request->name,
             'price' => $request->price,
+            'description' => $request->description,
         ]);
 
         if ($request->hasFile('image')) {
@@ -66,12 +68,14 @@ class ProductController extends Controller
             ],
             'name' => 'required|string|min:1|max:255',
             'price' => 'required|numeric|min:0',
+            'description' => 'nullable|string',
         ]);
 
         $product->update([
             'code' => $request->code,
             'name' => $request->name,
             'price' => $request->price,
+            'description' => $request->description,
         ]);
 
         if ($request->hasFile('image')) {
