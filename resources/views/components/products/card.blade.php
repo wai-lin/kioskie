@@ -3,6 +3,7 @@
     'store' => null,
     'href' => null,
     'isOwner' => false,
+    'name' => null,
 ])
 
 @php
@@ -44,7 +45,12 @@
                         </flux:button>
                     @endif
                     @guest
-                        <flux:checkbox name="products[]" :value="$product->id" label="Select" />
+                        <div>
+                            <label class="flex items-center gap-4">
+                                <input type="checkbox" name="{{$name}}" value="{{$product->id}}" class="flex-none" />
+                                <span>Select</span>
+                            </label>
+                        </div>
                     @endguest
                 </div>
 
