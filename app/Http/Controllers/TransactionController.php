@@ -26,15 +26,29 @@ class TransactionController extends Controller
             'store_id' => 'required|exists:stores,id',
         ]);
 
-//        dd($request->all());
-
         $products = Product::whereIn('id', $request->products)->get();
 
         $transactions = [];
         $actorId = auth()->id();
         $storeId= $request->store_id;
         $action = TransactionAction::SALE->value;
+        $quantity = 1;
         $now = now();
+
+        // Subtract 1 from the quantity of each product in the store
+        $products->each(function ($product) use ($storeId, $quantity) {
+            $qty = $product->stores()->first()->pivot->quantity;
+
+            // check still has enough quantity in store
+            if ($qty <= 0) {
+                $msg = 'Product '. $product->name . ' does not has enough stock in store';
+                return redirect()->route('stores.list')->with('error', $msg);
+            }
+
+            $product->stores()->updateExistingPivot($storeId, [
+                'quantity' =>  - $quantity,
+            ]);
+        });
 
         foreach ($products as $product) {
             $transactions[] = [
@@ -42,7 +56,7 @@ class TransactionController extends Controller
                 'product_id' => $product->id,
                 'store_id' => $storeId,
                 'action' => $action,
-                'quantity' => 1,
+                'quantity' => $quantity,
                 'price' => $product->price,
                 'created_at' => $now,
                 'updated_at' => $now,
