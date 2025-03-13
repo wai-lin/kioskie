@@ -54,7 +54,7 @@ class StoreController extends Controller
 
         if ($request->hasFile('logo')) {
             $store->addMediafromRequest('logo')
-                ->toMediaLibrary('stores.'.$store->id);
+                ->toMediaLibrary('stores');
         }
 
         return redirect()
@@ -75,12 +75,12 @@ class StoreController extends Controller
         ]);
 
         $store->update([
-            'name' => $request->name,
+            'name' => $request->name
         ]);
         if ($request->hasFile('logo')) {
-            $store->clearMediaCollection('stores.'.$store->id);
+            $store->media()->each(fn ($m) => $m->delete());
             $store->addMediafromRequest('logo')
-                ->toMediaLibrary('stores.'.$store->id);
+                ->toMediaLibrary('stores');
         }
 
         return redirect()
