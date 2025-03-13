@@ -7,8 +7,8 @@
 
     <x-form method="put" :action="route('stores.edit_stock', compact('store', 'product'))" class="max-w-1/3 space-y-6">
         <flux:select wire:model="action">
-            <flux:select.option value="restock">Restock</flux:select.option>
-            <flux:select.option value="deplete">Deplete</flux:select.optionkk>
+            <flux:select.option value="add_stock">Restock</flux:select.option>
+            <flux:select.option value="remove_stock">Deplete</flux:select.optionkk>
         </flux:select>
 
         <flux:input wire:model="amount" type="number" />
