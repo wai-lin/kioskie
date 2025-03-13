@@ -12,11 +12,11 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('store_id');
-            $table->foreignId('actor_id');
             $table->foreignId('product_id');
+            $table->foreignId('actor_id')->nullable();
             $table->integer('quantity');
             $table->enum('action', TransactionAction::values());
-            $table->decimal('price', 10, 2);
+            $table->decimal('price', 10, 2)->nullable();
             $table->timestamps();
         });
     }

@@ -1,4 +1,6 @@
-<x-layouts.site class="pt-4">
+<x-layouts.site class="pt-4 pb-10">
+    <x-notification type="success" :message="Session::get('success')" />
+
     <flux:heading size="xl" class="flex items-center gap-4">
         <img
             alt=""

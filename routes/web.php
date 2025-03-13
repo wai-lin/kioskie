@@ -11,11 +11,14 @@ Route::get('/', function () {
 })->name('home');
 
 Route::prefix('stores')->group(function () {
-    Route::get('list', [StoreController::class, 'storesList'])
+    Route::get('list', [StoreController::class, 'showStoresList'])
         ->name('stores.list');
-    Route::get('{store}/products', [StoreController::class, 'storeProducts'])
+    Route::get('{store}/products', [StoreController::class, 'showStoreProducts'])
         ->name('stores.products');
 });
+
+Route::post('transactions/order', [TransactionController::class, 'order'])
+    ->name('transactions.order');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -29,7 +32,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('stores', StoreController::class);
     Route::resource('products', ProductController::class);
-    Route::resource('transactions', TransactionController::class);
+    Route::resource('transactions', TransactionController::class)->only('index');
 
     Route::get('stores/{store}/link-products', [StoreController::class, 'linkProductsForm'])
         ->name('stores.link_products_form');
