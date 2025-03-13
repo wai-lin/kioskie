@@ -149,10 +149,11 @@ class StoreController extends Controller
             'amount' => 'required|integer|min:1',
         ]);
 
+        $amount = intval($request->amount);
         $productQty = $store->products()->where('product_id', $product->id)->first()->pivot->quantity ?? 0;
         $newQty = match ($request->action) {
-            $addStock => $productQty + $request->amount,
-            $removeStock => $productQty - $request->amount,
+            $addStock => $productQty + $amount,
+            $removeStock => $productQty - $amount,
         };
 
         $store->products()->updateExistingPivot($product->id, [
@@ -163,7 +164,7 @@ class StoreController extends Controller
             'store_id' => $store->id,
             'actor_id' => Auth::id(),
             'product_id' => $product->id,
-            'quantity' => $request->amount,
+            'quantity' => $amount,
             'action' => $request->action,
             'price' => $product->price,
         ]);
