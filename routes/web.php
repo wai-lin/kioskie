@@ -29,7 +29,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('stores', StoreController::class);
     Route::resource('products', ProductController::class);
-    Route::resource('transactions', TransactionController::class);
+    Route::resource('transactions', TransactionController::class)->only('index');
 
     Route::get('stores/{store}/link-products', [StoreController::class, 'linkProductsForm'])
         ->name('stores.link_products_form');

@@ -10,12 +10,14 @@ class Transaction extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     /**
      * Get the user that owns the transaction.
      */
-    public function user(): BelongsTo
+    public function actor(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'actor_id');
     }
 
     /**
@@ -23,7 +25,7 @@ class Transaction extends Model
      */
     public function product(): BelongsTo
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class, 'product_id');
     }
 
     /**
@@ -31,6 +33,6 @@ class Transaction extends Model
      */
     public function store(): BelongsTo
     {
-        return $this->belongsTo(Store::class);
+        return $this->belongsTo(Store::class, 'store_id');
     }
 }

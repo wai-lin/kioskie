@@ -3,5 +3,5 @@
         <flux:breadcrumbs.item>Transactions</flux:breadcrumbs.item>
     </flux:breadcrumbs>
 
-
+    <x-transactions.table :transactions="$transactions" />
 </x-layouts.app>
