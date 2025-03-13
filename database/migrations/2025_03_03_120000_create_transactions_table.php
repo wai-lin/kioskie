@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('product_id');
             $table->integer('quantity');
             $table->enum('action', TransactionAction::values());
-            $table->decimal('price', 10, 2);
+            $table->decimal('price', 10, 2)->nullable();
             $table->timestamps();
         });
     }
