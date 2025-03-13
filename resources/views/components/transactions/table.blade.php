@@ -47,7 +47,7 @@
                     </flux:link>
                 </td>
                 <td class="px-6 py-4">
-                    {{$transaction->actor->name}}
+                    {{$transaction?->actor?->name ?: '-'}}
                 </td>
                 <td class="px-6 py-4">
                     {{$transaction->action}}
@@ -59,17 +59,13 @@
                     {{$transaction->price}} THB
                 </td>
                 <td class="px-6 py-4" data-datetime="{{$transaction->created_at}}">
-                    {{$transaction->created_at->format('d M, Y (h:i:s A) e')}}
+                    {{$transaction->created_at?->format('d M, Y (h:i:s A) e')}}
                 </td>
             </tr>
         @endforeach
         </tbody>
     </table>
 </div>
-
-@php
-    $timezone = $transaction->created_at->format('e');
-@endphp
 
 @once
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
