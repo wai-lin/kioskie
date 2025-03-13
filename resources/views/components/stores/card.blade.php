@@ -10,7 +10,7 @@
 
 <x-card>
     <div class="flex items-center gap-4 mb-4">
-        <x-image :src="$store->getFirstMediaUrl('stores.'.$store->id)" class="size-12 rounded-lg"/>
+        <x-image :src="$store->getFirstMediaUrl('stores')" class="size-12 rounded-lg"/>
         <h5 title="{{$store->name}}" class="text-lg font-bold truncate max-w-full">
             {{$store->name}}
         </h5>

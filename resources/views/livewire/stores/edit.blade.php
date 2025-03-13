@@ -11,7 +11,7 @@
         :action="route('stores.update', $store)"
         class="max-w-1/3 space-y-6"
     >
-        <x-image-upload id="logo" name="logo" label="Logo" :src="$store->getFirstMediaUrl('stores.'.$store->id)" />
+        <x-image-upload id="logo" name="logo" label="Logo" :src="$store->getFirstMediaUrl('stores')" />
 
         <flux:input
             wire:model="name"
@@ -23,7 +23,7 @@
 
         <div class="flex justify-end gap-4">
             <flux:button size="sm" :href="route('stores.index')">Cancel</flux:button>
-            <flux:button size="sm" variant="primary" type="submit">Edit</flux:button>
+            <flux:button size="sm" variant="primary" type="submit">Save</flux:button>
         </div>
     </x-form>
 </x-layouts.app>
