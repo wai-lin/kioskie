@@ -24,6 +24,8 @@ class TransactionController extends Controller
             'products' => 'required|array',
             'products.*' => 'required|exists:products,id',
             'store_id' => 'required|exists:stores,id',
+        ], [
+            'products.required' => 'Please select at least one product.',
         ]);
 
         $products = Product::whereIn('id', $request->products)->get();
@@ -46,7 +48,7 @@ class TransactionController extends Controller
             }
 
             $product->stores()->updateExistingPivot($storeId, [
-                'quantity' =>  - $quantity,
+                'quantity' => $qty - $quantity,
             ]);
         });
 
