@@ -17,6 +17,9 @@ Route::prefix('stores')->group(function () {
         ->name('stores.products');
 });
 
+Route::post('transactions/order', [TransactionController::class, 'order'])
+    ->name('transactions.order');
+
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
