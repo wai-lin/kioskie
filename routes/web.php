@@ -11,9 +11,9 @@ Route::get('/', function () {
 })->name('home');
 
 Route::prefix('stores')->group(function () {
-    Route::get('list', [StoreController::class, 'storesList'])
+    Route::get('list', [StoreController::class, 'showStoresList'])
         ->name('stores.list');
-    Route::get('{store}/products', [StoreController::class, 'storeProducts'])
+    Route::get('{store}/products', [StoreController::class, 'showStoreProducts'])
         ->name('stores.products');
 });
 

@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Enums\StoreRole;
+use App\Enums\TransactionAction;
 use App\Models\Product;
 use App\Models\Store;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class StoreController extends Controller
 {
@@ -93,7 +96,7 @@ class StoreController extends Controller
             ->with('info', 'Store deleted successfully.');
     }
 
-    public function storesList()
+    public function showStoresList()
     {
         $stores = Store::with(['products', 'owners'])
             ->orderByDesc('updated_at')
@@ -102,7 +105,7 @@ class StoreController extends Controller
         return view('livewire.stores.list', compact('stores'));
     }
 
-    public function storeProducts(Store $store)
+    public function showStoreProducts(Store $store)
     {
         return view('livewire.stores.products', compact('store'));
     }
@@ -139,19 +142,30 @@ class StoreController extends Controller
 
     public function editProductStock(Request $request, Store $store, Product $product)
     {
+        $addStock = TransactionAction::ADD_STOCK->value;
+        $removeStock = TransactionAction::REMOVE_STOCK->value;
         $request->validate([
-            'action' => 'required|in:restock,deplete',
+            'action' => ['required', Rule::in($addStock, $removeStock)],
             'amount' => 'required|integer|min:1',
         ]);
 
         $productQty = $store->products()->where('product_id', $product->id)->first()->pivot->quantity ?? 0;
         $newQty = match ($request->action) {
-            'restock' => $productQty + $request->amount,
-            'deplete' => $productQty - $request->amount,
+            $addStock => $productQty + $request->amount,
+            $removeStock => $productQty - $request->amount,
         };
 
         $store->products()->updateExistingPivot($product->id, [
             'quantity' => $newQty,
+        ]);
+
+        Transaction::create([
+            'store_id' => $store->id,
+            'actor_id' => Auth::id(),
+            'product_id' => $product->id,
+            'quantity' => $request->amount,
+            'action' => $request->action,
+            'price' => $product->price,
         ]);
 
         return redirect()
