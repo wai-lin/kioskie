@@ -12,10 +12,10 @@
 @endphp
 
 <x-card>
-    <div class="flex items-center gap-4">
-        <x-image :src="$product->getFirstMediaUrl('products.'.$product->id)" class="size-28 rounded-lg flex-none" />
+    <div class="flex items-stretch gap-4">
+        <x-image :src="$product->getFirstMediaUrl('products.'.$product->id)" class="size-28 rounded-lg flex-none"/>
 
-        <div class="flex-auto">
+        <div class="flex-auto flex flex-col justify-between pb-1">
             <div class="flex flex-col justify-between mb-4">
                 <h5 title="{{$product->name}}" class="text-lg font-bold truncate max-w-[90%]">
                     {{$product->name}}
@@ -26,12 +26,14 @@
                     <span>THB</span>
                 </p>
 
-                @if($quantity > 0)
-                    <p class="flex items-end gap-1 text-sm {{$quantityColor}}">
-                        <span>Qty :</span>
-                        <span>{{$quantity}}</span>
-                    </p>
-                @endif
+                @auth
+                    @if($quantity > 0)
+                        <p class="flex items-end gap-1 text-sm {{$quantityColor}}">
+                            <span>Qty :</span>
+                            <span>{{$quantity}}</span>
+                        </p>
+                    @endif
+                @endauth
             </div>
 
             <div class="flex items-end justify-between">
@@ -41,6 +43,9 @@
                             View Details
                         </flux:button>
                     @endif
+                    @guest
+                        <flux:checkbox name="products[]" :value="$product->id" label="Select" />
+                    @endguest
                 </div>
 
                 @auth
