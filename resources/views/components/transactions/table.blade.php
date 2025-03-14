@@ -2,6 +2,14 @@
     'transactions',
 ])
 
+@php
+    $actionMap = [
+        'add_stock' => 'Restock',
+        'remove_stock' => 'Deplete',
+        'sale' => 'Sale',
+    ];
+@endphp
+
 <div class="py-4">
     {{$transactions->links()}}
 </div>
@@ -49,8 +57,8 @@
                 <td class="px-6 py-4">
                     {{$transaction?->actor?->name ?: '-'}}
                 </td>
-                <td class="px-6 py-4">
-                    {{$transaction->action}}
+                <td class="px-6 py-4 uppercase">
+                    {{$actionMap[$transaction->action]}}
                 </td>
                 <td class="px-6 py-4 text-right">
                     {{$transaction->quantity ?: '-'}}
