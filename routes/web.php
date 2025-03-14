@@ -6,7 +6,7 @@ use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
-Route::get('/', fn () => view('welcome'))->name('home');
+Route::get('/', fn () => redirect()->route('stores.list'))->name('home');
 
 Route::prefix('stores')->group(function () {
     Route::get('list', [StoreController::class, 'showStoresList'])
