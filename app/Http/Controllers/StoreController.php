@@ -90,7 +90,8 @@ class StoreController extends Controller
 
     public function destroy(Store $store)
     {
-        Store::destroy($store->id);
+        $store->media()->delete();
+        $store->delete();
 
         return redirect()->route('stores.index')
             ->with('info', 'Store deleted successfully.');
