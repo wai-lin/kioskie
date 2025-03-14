@@ -22,7 +22,7 @@
             <th scope="col" class="px-6 py-3">
                 Action
             </th>
-            <th scope="col" class="px-6 py-3">
+            <th scope="col" class="px-6 py-3 text-right">
                 Amount
             </th>
             <th scope="col" class="px-6 py-3 text-right">
@@ -52,8 +52,8 @@
                 <td class="px-6 py-4">
                     {{$transaction->action}}
                 </td>
-                <td class="px-6 py-4">
-                    {{$transaction->amount ?: '-'}}
+                <td class="px-6 py-4 text-right">
+                    {{$transaction->quantity ?: '-'}}
                 </td>
                 <td class="px-6 py-4 text-right">
                     {{$transaction->price}} THB

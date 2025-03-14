@@ -14,9 +14,12 @@
     </div>
 
     <x-form id="products" :action="route('transactions.order')">
-        <input type="hidden" name="store_id" value="{{$store->id}}" />
-        <flux:error name="products" />
-        <flux:error name="store_id" />
+        <input type="hidden" name="store_id" value="{{$store->id}}"/>
+        <div class="py-4">
+            <flux:error name="products"/>
+            <flux:error name="store_id"/>
+        </div>
+
         <section class="grid grid-cols-4 gap-8">
             @foreach($store->products as $product)
                 <x-products.card :product="$product" name="products[]"/>

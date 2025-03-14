@@ -25,7 +25,7 @@
                 Cancel
             </flux:button>
             <flux:button size="sm" variant="primary" type="submit">
-                Edit
+                Save
             </flux:button>
         </div>
     </x-form>
